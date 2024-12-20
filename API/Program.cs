@@ -14,6 +14,14 @@ builder.Services.AddDbContext<DataContext>(options => {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+ // Add Cors
+ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+        {
+           
+          builder.AllowAnyMethod().AllowAnyHeader()
+                   .WithOrigins("http://localhost:4200");
+        }));
+
 var app = builder.Build();
 
 
@@ -25,7 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-
+app.UseCors("CorsPolicy");
+  
 app.UseAuthorization();
 
 app.MapControllers();
