@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { HeaderComponent } from "./layout/header/header.component";
+import { Activity } from './shared/models/activity';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit{
   private http = inject(HttpClient);
   
 
-  activities:any[] = [];
+  activities:Activity[] = [];
 
  ngOnInit(){
      this.getActivity();   
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit{
   
  getActivity(){
 
-  this.http.get<any[]>(this.baseUrl + 'activities')
+  this.http.get<Activity[]>(this.baseUrl + 'activities')
      .subscribe({   
        next: (response) => {
         //this.activities = response as string[]

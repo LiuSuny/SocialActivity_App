@@ -1,12 +1,16 @@
-
-
-
+<ng-container>
+  
 <app-header/>
-<div class="ui list">
+
+<div class="ui container" style="margin-top: 7em;">
+  <div class="ui list">
     @for (acti of activities; track acti.id) {
-      <li class="item">{{acti.title}} - {{acti.category}}</li>
+      <li class="item">{{acti.city}} - {{acti.category}}</li>
     }
   </div>
+</div>
+
+</ng-container>
 
 
  
