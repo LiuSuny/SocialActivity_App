@@ -1,0 +1,18 @@
+<div class="ui segment">
+    <div class="ui unstackable divided items">
+        @for (acti of activities; track acti.id) {
+            <div class="item">
+                <div class="middle aligned content">
+                    <a class="header">{{acti.title}}</a>
+                    <div class="meta">{{acti.date}}</div> 
+                    <div class="description">{{acti.description}}</div> 
+                    <div class="description">{{acti.city}}, {{acti.venue}}</div> 
+                    <div class="extra">
+                        <div class="ui right floated blue button">View</div>                                                   
+                        <a class="ui basic label">{{acti.category}}</a>
+                    </div>                 
+                </div>
+            </div>
+          }
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="ui grid">
+    <div class="ten wide column">      
+        <app-activitylist [activities]="activities"/>
+    </div>
+    <div class="six wide column">      
+     @if (activities[0]) {
+      <app-activity-details [activities]="activities[0]"/> 
+     }
+    </div>
+</div>
