@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   title = 'Reactivities';
+  //emitting from child to parent class
+  @Output() openForm = new EventEmitter<void>();
+
+  onAddActivity(): void {
+    this.openForm.emit();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Activity } from '../../../../shared/models/activity';
 
 @Component({
@@ -10,5 +10,16 @@ import { Activity } from '../../../../shared/models/activity';
 })
 export class ActivityDetailsComponent {
 
-  @Input() activities?:Activity;
+  @Input() activity!: Activity;
+  
+  @Output() cancelSelectActivity = new EventEmitter<void>();
+  @Output() openForm = new EventEmitter<string>();
+
+  onEdit(): void {
+    this.openForm.emit(this.activity.id);
+  }
+
+  onCancel(): void {
+    this.cancelSelectActivity.emit();
+  }
 }

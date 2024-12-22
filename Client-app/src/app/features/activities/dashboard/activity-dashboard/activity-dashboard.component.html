@@ -1,10 +1,32 @@
 <div class="ui grid">
     <div class="ten wide column">      
-        <app-activitylist [activities]="activities"/>
+        <app-activitylist
+        [activities]="activities"
+        (selectActivity)="onSelectActivity($event)"
+        (deleteActivity)="onDeleteActivity($event)"
+        ></app-activitylist>
     </div>
-    <div class="six wide column">      
-     @if (activities[0]) {
-      <app-activity-details [activities]="activities[0]"/> 
-     }
-    </div>
+    <div class="six wide column">
+
+        @if (selectedActivity && !editMode) {
+          <ng-container >
+            <app-activity-details
+              [activity]="selectedActivity"
+              (cancelSelectActivity)="onCancelSelect()"
+              (openForm)="onOpenForm($event)"
+            ></app-activity-details>
+          </ng-container>
+  
+        }
+           @if (editMode){
+            <ng-container>
+              <app-activityform
+                [activity]="selectedActivity"
+                (closeForm)="onCloseForm()"
+                (createOrEdit)="onCreateOrEdit($event)"
+              ></app-activityform>
+            </ng-container>
+           }
+       
+      </div>
 </div>

@@ -1,13 +1,23 @@
 <ng-container>
   
-<app-header/>
+<app-header (openForm)="openForm()"/>
 
 <div class="ui container" style="margin-top: 7em;">
-  <app-activity-dashboard />
+    <app-activity-dashboard
+      [activities]="activities"
+      [selectedActivity]="selectedActivity"
+      [editMode]="editMode"
+      (selectActivity)="selectActivity($event)"
+      (cancelSelect)="cancelSelect()"
+      (openForm)="openForm($event)"
+      (closeForm)="closeForm()"
+      (createOrEdit)="createOrEditActivity($event)"
+      (deleteActivity)="deleteActivity($event)"></app-activity-dashboard>
+   
+  
 </div>
 
 </ng-container>
 
-
  
-
+ 

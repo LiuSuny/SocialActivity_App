@@ -23,7 +23,7 @@ namespace API.Extensions
                         {
                         
                         builder.AllowAnyMethod().AllowAnyHeader()
-                                .WithOrigins("http://localhost:4200");
+                                .WithOrigins("http://localhost:4200", "http://localhost:3000");
                         }));
 
                 services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
