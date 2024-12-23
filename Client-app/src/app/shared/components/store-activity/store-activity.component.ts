@@ -29,15 +29,20 @@ export class StoreActivityComponent implements OnInit{
   //finding out if our submit works
   submitting: boolean = false;
 
+  get activityByDate() {
+    return Array.from(this.activities.values())
+       .sort((a,b) => Date.parse(a.date) - Date.parse(b.date))
+  }
   
   //getting hold of all the activity 
   ngOnInit(): void {
     this.activityService.getActivities().subscribe({
       next: (response) => {
         this.activities = response.map((activity) => ({
-          ...activity,
+          ...activity,       
           date: activity.date.split('T')[0],
-        }));
+          
+        }))     
         this.loading = false;
       },
       error: (err) => {
@@ -116,6 +121,7 @@ export class StoreActivityComponent implements OnInit{
     this.activityService.delete(id).subscribe({
       next: () => {
         this.activities = this.activities.filter((x) => x.id !== id);
+        if(this.selectedActivity?.id ===id) this.handleCancelSelect();
         this.submitting = false;
       },
       error: (err) => {

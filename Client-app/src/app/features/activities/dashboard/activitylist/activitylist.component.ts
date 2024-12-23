@@ -18,6 +18,7 @@ export class ActivitylistComponent {
   @Output() handleSelectActivity = new EventEmitter<string>();
   @Output() handleDeleteActivity = new EventEmitter<string>();
   
+
   loadingStates: { [key: string]: boolean } = {};
 
   target: string = '';

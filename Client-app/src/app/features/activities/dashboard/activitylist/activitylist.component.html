@@ -17,20 +17,6 @@
             >
               View
             </button>
-
-<!--        
-              <button
-              class="ui red button right floated"
-              [ngClass]="{ loading: loadingStates[activity.id] }"
-              [disabled]="submitting && target === activity.id"
-              [attr.name]="activity.id && isLoading"
-              (click)="onDeleteActivity($event, activity.id)"
-
-             
-            >
-            {{ isLoading ? 'Loading...' : 'Delete' }}
-            
-            </button> -->
             <button
               class="ui red button right floated"
               [ngClass]="{ loading: loadingStates[activity.id] }"
