@@ -13,8 +13,8 @@ export class ActivityformComponent implements OnInit{
   
   @Input() activity?: Activity;
 
-  @Output() closeForm = new EventEmitter<void>();
-  @Output() createOrEdit = new EventEmitter<Activity>();
+  @Output() handleFormClose = new EventEmitter<void>();
+  @Output() handleCreateOrEditActivity = new EventEmitter<Activity>();
 
   activityForm!: FormGroup;
 
@@ -39,11 +39,11 @@ export class ActivityformComponent implements OnInit{
   //handle submit
   onSubmit(): void {
     if (this.activityForm.valid) {
-      this.createOrEdit.emit(this.activityForm.value);
+      this.handleCreateOrEditActivity.emit(this.activityForm.value);
     }
   }
 
   onCancel(): void {
-    this.closeForm.emit();
+    this.handleFormClose.emit();
   }
 }

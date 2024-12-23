@@ -19,38 +19,41 @@ export class ActivityDashboardComponent{
  @Input() activities: Activity[] = []; 
  @Input() selectedActivity?: Activity;
  @Input() editMode = false;
+ 
+ @Input() submitting: boolean = false;
+
   
  //emitting all the method to the parent class which is app.component html
- @Output() selectActivity = new EventEmitter<string>();
- @Output() cancelSelect = new EventEmitter<void>();
- @Output() openForm = new EventEmitter<string | undefined>();
- @Output() closeForm = new EventEmitter<void>();
- @Output() createOrEdit = new EventEmitter<Activity>();
- @Output() deleteActivity = new EventEmitter<string>();
+ @Output() handleSelectActivity = new EventEmitter<string>();
+ @Output() handleCancelSelect = new EventEmitter<void>();
+ @Output() handleFormOpen = new EventEmitter<string | undefined>();
+ @Output() handleFormClose = new EventEmitter<void>();
+ @Output() handleCreateOrEditActivity = new EventEmitter<Activity>();
+ @Output() handleDeleteActivity = new EventEmitter<string>();
 
  
  onSelectActivity(id: string): void {
-   this.selectActivity.emit(id);
+   this.handleSelectActivity.emit(id);
  }
 
  onCancelSelect(): void {
-   this.cancelSelect.emit();
+   this.handleCancelSelect.emit();
  }
 
  onOpenForm(id?: string): void {
-   this.openForm.emit(id);
+   this.handleFormOpen.emit(id);
  }
 
  onCloseForm(): void {
-   this.closeForm.emit();
+   this.handleFormClose.emit();
  }
 
  onCreateOrEdit(activity: Activity): void {
-   this.createOrEdit.emit(activity);
+   this.handleCreateOrEditActivity.emit(activity);
  }
 
  onDeleteActivity(id: string): void {
-   this.deleteActivity.emit(id);
+   this.handleDeleteActivity.emit(id);
  }
 
 }

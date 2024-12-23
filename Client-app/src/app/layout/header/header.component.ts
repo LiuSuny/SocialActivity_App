@@ -10,9 +10,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent {
   title = 'Reactivities';
   //emitting from child to parent class
-  @Output() openForm = new EventEmitter<void>();
+  @Output() handleFormOpen = new EventEmitter<void>();
 
   onAddActivity(): void {
-    this.openForm.emit();
+    this.handleFormOpen.emit();
   }
 }

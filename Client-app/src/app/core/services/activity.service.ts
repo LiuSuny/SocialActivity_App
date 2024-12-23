@@ -16,4 +16,21 @@ export class ActivityService {
   getActivities(): Observable<Activity[]> {
     return this.http.get<Activity[]>(this.baseUrl + 'activities');
   }
+
+  details(id: string): Observable<Activity>{
+     return this.http.get<Activity>(this.baseUrl + 'activities/' + id);
+  }
+
+  create(activity: Activity): Observable<void>{
+    return this.http.post<void>(this.baseUrl + 'activities', activity, {});
+  }
+
+  update(activity: Activity): Observable<void>{
+    return this.http.put<void>(this.baseUrl +'activities/' + activity.id, activity);
+  }
+
+  delete(id: string): Observable<void>{
+    return this.http.delete<void>(this.baseUrl + 'activities/' + id);
+  }
+
 }

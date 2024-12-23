@@ -12,14 +12,14 @@ export class ActivityDetailsComponent {
 
   @Input() activity!: Activity;
   
-  @Output() cancelSelectActivity = new EventEmitter<void>();
-  @Output() openForm = new EventEmitter<string>();
+  @Output() handleCancelSelectActivity = new EventEmitter<void>();
+  @Output() handleFormOpen = new EventEmitter<string>();
 
   onEdit(): void {
-    this.openForm.emit(this.activity.id);
+    this.handleFormOpen.emit(this.activity.id);
   }
 
   onCancel(): void {
-    this.cancelSelectActivity.emit();
+    this.handleCancelSelectActivity.emit();
   }
 }

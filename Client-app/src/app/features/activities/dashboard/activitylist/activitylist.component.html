@@ -1,7 +1,8 @@
 
 <div class="ui segment">
     <div class="ui divided items">
-      <div *ngFor="let activity of activities" class="item">
+      @for ( activity of activities; track activity.id) {     
+      <div class="item">
         <div class="content">
           <a class="header">{{ activity.title }}</a>
           <div class="meta">{{ activity.date }}</div>
@@ -16,15 +17,33 @@
             >
               View
             </button>
+
+<!--        
+              <button
+              class="ui red button right floated"
+              [ngClass]="{ loading: loadingStates[activity.id] }"
+              [disabled]="submitting && target === activity.id"
+              [attr.name]="activity.id && isLoading"
+              (click)="onDeleteActivity($event, activity.id)"
+
+             
+            >
+            {{ isLoading ? 'Loading...' : 'Delete' }}
+            
+            </button> -->
             <button
               class="ui red button right floated"
-              (click)="onDeleteActivity(activity.id)"
+              [ngClass]="{ loading: loadingStates[activity.id] }"
+              [disabled]="loadingStates[activity.id]"
+              (click)="onDeleteActivity($event, activity.id)"
             >
               Delete
             </button>
+            
             <div class="ui basic label">{{ activity.category }}</div>
           </div>
         </div>
       </div>
+    }
     </div>
   </div>
