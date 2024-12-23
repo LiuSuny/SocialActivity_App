@@ -1,0 +1,31 @@
+
+  <div class="ui fluid card">
+    <div class="image">
+      <img [src]="'/assets/categoryImages/' + activity.category + '.jpg'" alt="{{ activity.category }}" />
+    </div>
+    <div class="content">
+      <div class="header">{{ activity.title }}</div>
+      <div class="meta">
+        <span>{{ activity.date }}</span>
+      </div>
+      <div class="description">
+        {{ activity.description }}
+      </div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <button
+          class="ui basic blue button"
+          (click)="onEdit()"
+        >
+          Edit
+        </button>
+        <button
+          class="ui basic grey button"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
