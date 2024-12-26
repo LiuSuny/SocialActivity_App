@@ -1,3 +1,4 @@
+using Application.Core;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -8,11 +9,11 @@ namespace Application.Activities
     public class List
     {
         //Query that get all list of activity
-        public class Query : IRequest<List<Activity>>{}
+        public class Query : IRequest<Result<List<Activity>>>{}
 
-        public class Handler(DataContext context) : IRequestHandler<Query, List<Activity>>
+        public class Handler(DataContext context) : IRequestHandler<Query, Result<List<Activity>>>
         {
-            public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<List<Activity>>> Handle(Query request, CancellationToken cancellationToken)
             {
 
                 // //testing the cancellationToken and how it works
@@ -30,7 +31,8 @@ namespace Application.Activities
                 //     logger.LogInformation("Task was cancelled");
                 // }
 
-               return await context.Activities.ToListAsync();
+               var activity = await context.Activities.ToListAsync();
+                return Result<List<Activity>>.Success(activity);
             }
         }
     }

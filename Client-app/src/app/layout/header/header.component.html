@@ -1,14 +1,14 @@
 <div class="ui inverted top fixed menu">
     <div class="ui container">
-       <div class="header item">
-          <img src="/assets/logo.png" alt="logo" style="margin-right: 10px;">
+       <div class="header item" routerLink="/">
+          <img  src="/assets/logo.png" alt="logo" style="margin-right: 10px;">
           {{title}}
        </div>
-       <a class="item">
+       <a routerLink="/activities" routerLinkActive="active" class="item">
         Activities
       </a>
       <a class="item">
-        <div class="ui buttons">
+        <div class="ui buttons" routerLink="/createActivity" routerLinkActive="active">
         <button class="ui positive button" (click)="onAddActivity()">Create Activity</button>
         </div>
       </a>

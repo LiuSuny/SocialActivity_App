@@ -93,7 +93,8 @@
                 "input": "public"
               }
             ],
-            "styles": [            
+            "styles": [    
+              "semantic-ui-master/dist/semantic.min.css",        
               "src/styles.css"
             ],
             "scripts": []

@@ -5,11 +5,12 @@ import { ActivityDashboardComponent } from "../../../features/activities/dashboa
 import { Activity } from '../../models/activity';
 import { v4 as uuid } from 'uuid';
 import { ActivityService } from '../../../core/services/activity.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-store-activity',
   standalone: true,
-  imports: [LoadingComponent, HeaderComponent, ActivityDashboardComponent],
+  imports: [LoadingComponent, ActivityDashboardComponent, HeaderComponent],
   templateUrl: './store-activity.component.html',
   styleUrl: './store-activity.component.css'
 })
