@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -14,12 +15,7 @@ var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+app.UseMiddleware<ExceptionsMiddleware>();
 
 app.UseCors("CorsPolicy");
   
