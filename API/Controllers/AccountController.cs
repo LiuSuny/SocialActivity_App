@@ -45,10 +45,16 @@ namespace API.Controllers
          {
               
             if(await UserNameExists(registerDto.Username)) 
-             return BadRequest("Username is already taken");
+            {
+                ModelState.AddModelError("username", "Username taken");
+                return ValidationProblem();
+            }
 
              if(await UserEmailExists(registerDto.Email)) 
-             return BadRequest("Email is already taken");
+            {
+                 ModelState.AddModelError("email", "Email taken");
+                return ValidationProblem();
+            }
             
             var user = new AppUser
             {
