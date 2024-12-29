@@ -1,15 +1,26 @@
 using API.Extensions;
 using API.Middleware;
+using Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//this means every controller will require authentication
+builder.Services.AddControllers(
+  opt => {
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+  }
+);
 
-builder.Services.AddControllers();
 
 builder.Services.AddApplicationService(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -18,7 +29,8 @@ var app = builder.Build();
 app.UseMiddleware<ExceptionsMiddleware>();
 
 app.UseCors("CorsPolicy");
-  
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -33,7 +45,8 @@ app.MapControllers();
       var context = services.GetRequiredService<DataContext>();
                
       await context.Database.MigrateAsync(); 
-      await Seed.SeedData(context);
+      var userManager = services.GetRequiredService<UserManager<AppUser>>(); 
+      await Seed.SeedData(context, userManager);
     }
       catch (Exception ex)
     {
