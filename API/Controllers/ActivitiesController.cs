@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [AllowAnonymous]
     public class ActivitiesController : BaseApiController
     {
         //Testing CancellationToken and what it does
@@ -16,7 +15,7 @@ namespace API.Controllers
         // } 
 
          [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetAllActivity()
+        public async Task<IActionResult> GetAllActivity()
         {
             return HandleResult(await Mediator.Send(new List.Query()));
         } 
