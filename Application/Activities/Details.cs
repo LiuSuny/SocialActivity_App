@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Core;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,22 +14,24 @@ namespace Application.Activities
 {
     public class Details
     {
-         public class Query : IRequest<Result<Activity>>
+         public class Query : IRequest<Result<ActivityDto>>
          {
             public Guid Id {get; set;}
          }
 
-        public class Handler(DataContext context) : 
-        IRequestHandler<Query, Result<Activity>>
+        public class Handler(DataContext context, IMapper mapper) : 
+        IRequestHandler<Query, Result<ActivityDto>>
         {
-            public async Task<Result<Activity>> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<Result<ActivityDto>> Handle(Query request, CancellationToken cancellationToken)
             {
-              var activity = await context.Activities.FindAsync(request.Id);
+              var activity = await context.Activities
+                 .ProjectTo<ActivityDto>(mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
             //   if(activity == null) throw new Exception("Activity not found");
 
             //     return activity;
 
-               return Result<Activity>.Success(activity);
+               return Result<ActivityDto>.Success(activity);
 
             }
         }
